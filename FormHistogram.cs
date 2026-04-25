@@ -185,11 +185,7 @@ namespace DIP
                 }
             }
 
-            // Clear and Update the Chart
-            chart2.Series["Red"].Points.Clear();
-            chart2.Series["Green"].Points.Clear();
-            chart2.Series["Blue"].Points.Clear();
-
+            
             for (int i = 0; i < 256; i++)
             {
                 chart2.Series["Red"].Points.AddXY(i, rH[i]);

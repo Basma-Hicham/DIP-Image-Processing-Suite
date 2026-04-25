@@ -84,14 +84,23 @@ namespace DIP
             {
                 byte* s = (byte*)image1.Data;
                 byte* d = (byte*)img.Data;
-                int stride = image1.Width * image1.Channels();
+               int channels = image1.Channels();
+int width = image1.Width;
+int height = image1.Height;
 
-                for (int i = 0; i < image1.Height * stride; i += 3)
-                {
-                    d[i] = 0;         // Blue 0
-                    d[i + 1] = s[i + 1]; // Keep Green
-                    d[i + 2] = 0;     // Red 0
-                }
+for (int r = 0; r < height; r++)
+{
+    for (int c = 0; c < width; c++)
+    {
+        // Calculate index: (Row * Width * Channels) + (Column * Channels)
+        int index = (r * width * channels) + (c * channels);
+
+        // OpenCV stores pixels in BGR order
+        d[index + 0] = 0;             // Set Blue to 0
+        d[index + 1] = s[index + 1];             // Copy original Green
+        d[index + 2] = 0;   // Set Red to 0
+    }
+}
             }
             pictureBox2.Image = img.ToBitmap();
         
